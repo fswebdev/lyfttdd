@@ -41,3 +41,19 @@ class CarFactory:
         battery = NubbinBattery(current_date, last_service_date)
         car = Car(engine, battery)
         return car
+
+    @staticmethod
+    def create_car(model_name, current_date, last_service_date, current_mileage, last_service_mileage, tire_wear_array):
+        tires = [CarriganTire(tire_wear_array) for _ in range(4)] if model_name == "calliope" else [OctoprimeTire(tire_wear_array) for _ in range(4)]
+        if model_name == "calliope":
+            return CarFactory.create_calliope(current_date, last_service_date, current_mileage, last_service_mileage, tires)
+        elif model_name == "glissade":
+            return CarFactory.create_glissade(current_date, last_service_date, current_mileage, last_service_mileage, tires)
+        elif model_name == "palindrome":
+            return CarFactory.create_palindrome(current_date, last_service_date, tire_wear_array, tires)
+        elif model_name == "rorschach":
+            return CarFactory.create_rorschach(current_date, last_service_date, current_mileage, last_service_mileage, tires)
+        elif model_name == "thovex":
+            return CarFactory.create_thovex(current_date, last_service_date, current_mileage, last_service_mileage, tires)
+        else:
+            raise ValueError(f"Invalid car model name: {model_name}")
